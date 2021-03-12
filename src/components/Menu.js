@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const MenuList = styled.ul`
   display: flex;
@@ -27,14 +28,18 @@ const MenuItem = styled.li`
 function Menu() {
   return (
     <MenuList>
-      <MenuItem>
-        <img src= "/images/map.png"/>
-        <span>백신접종센터</span>
-      </MenuItem>
-      <MenuItem>
-        <img src= "/images/mymap.png"/>
-        <span>접종현황</span>
-      </MenuItem>
+      <Link to='/'>
+        <MenuItem>
+          <img src= "/images/map.png"/>
+          <span>백신접종센터</span>
+        </MenuItem>
+      </Link>
+      <Link to='/condition'>
+        <MenuItem>
+          <img src= "/images/mymap.png"/>
+          <span>접종현황</span>
+        </MenuItem>
+      </Link>
       <MenuItem>
         <img src= "/images/me.png"/>
         <span>나의백신순서</span>
