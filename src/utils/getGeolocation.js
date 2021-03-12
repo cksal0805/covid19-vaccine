@@ -3,16 +3,13 @@ export const getGeolocation = () => {
     // GPS를 지원하면
     return new Promise(resolve => {
       navigator.geolocation.getCurrentPosition(
-        function(position) {
-          console.info(
-            `re:${position.coords.latitude} ${position.coords.longitude}`,
-          );
+        (position) => {
           resolve({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
         },
-        function(error) {
+        (error) => {
           console.error(error);
           resolve({
             latitude: 37.3595704,
@@ -25,8 +22,7 @@ export const getGeolocation = () => {
           timeout: Infinity,
         },
       );
-    }).then(coords => {
-      console.log(`coords:${JSON.stringify(coords)}`);
+    }).then((coords) => {
       return coords;
     });
   }

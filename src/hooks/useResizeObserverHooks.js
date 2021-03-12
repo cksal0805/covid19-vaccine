@@ -5,7 +5,6 @@ const useResizeObserverHooks = (ref) => {
   useEffect(() => {
     const observerTarget = ref.current;
     const resizeObserver = new ResizeObserver((entries) => {
-      console.log(entries);
       entries.forEach((entry) => {
         setDimensions(entry.contentRect);
       });
@@ -14,7 +13,7 @@ const useResizeObserverHooks = (ref) => {
     return () => {
       resizeObserver.unobserve(observerTarget);
     }
-  }, [ref])
+  }, [ref]);
   return dimensions;
 }
 
