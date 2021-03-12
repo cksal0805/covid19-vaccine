@@ -3,6 +3,7 @@ import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Menu from "./components/Menu";
 import AppLayout from "./components/AppLayout";
 import MapView from "./pages/MapView";
+import Condition from "./pages/Condition";
 
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
             <Menu />
             <Switch>
               <Route exact path="/" component={MapView} />
+              <Route exact path="/condition" component={Condition} />
             </Switch>
           </>
         </AppLayout>
