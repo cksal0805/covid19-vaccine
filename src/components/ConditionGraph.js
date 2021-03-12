@@ -4,7 +4,6 @@ import useResizeObserverHooks from "../hooks/useResizeObserverHooks";
 import styled from 'styled-components';
 
 const GraphWrapper = styled.div`
-  background-color: #505362;
   width: 80%;
   height: 250px;
   margin-left: 35px;
@@ -51,15 +50,6 @@ function CondtionGraph({ data }) {
       .call(yAxis)
       .style("transform", `translateX(0px)`);
     svg
-      .selectAll(".dot")
-      .data(fiveDaysvaccineData)
-      .join("circle")
-      .attr("class", "dot")
-      .attr("fill", "#ccc")
-      .attr("r", "3")
-      .attr("cx", (value) => xScale(parseDate(value.date)))
-      .attr("cy", (value) => yScale(Number(value.people_vaccinated)))
-    svg
       .selectAll(".line")
       .data([fiveDaysvaccineData])
       .join("path")
@@ -68,6 +58,28 @@ function CondtionGraph({ data }) {
       .attr("fill", "none")
       .attr("stroke", "#00bfa5")
       .attr("stroke-width", 2)
+    svg
+      .selectAll(".dot")
+      .data(fiveDaysvaccineData)
+      .join("circle")
+      .attr("class", "dot")
+      .attr("fill", "#ccc")
+      .attr("r", "3")
+      .attr("cx", (value) => xScale(parseDate(value.date)))
+      .attr("cy", (value) => yScale(Number(value.people_vaccinated)))
+      .on("mouseenter", (value) => {
+        const Targetdata = value.target.__data__;
+        svg
+          .selectAll(".tooltip")
+          .data([value])
+          .join("text")
+          .attr("class", "tooltip")
+          .attr("x", xScale(parseDate(Targetdata.date)) - 35)
+          .attr("y", yScale(Number(Targetdata.people_vaccinated)) - 10)
+          .style("font-size", "0.85em")
+          .attr("fill", "#eee")
+          .text(Targetdata.people_vaccinated)
+      })
   }, [data, dimensions]);
   return (
     <GraphWrapper ref={graphWrapperRef}>
